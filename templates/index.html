@@ -1,19 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Phishing Demo Tool</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fusion Phishers - Ethical Training Tool</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Phishing Demo Tool (CTF/Ethical Use Only)</h1>
-    <p>Select a platform to generate a fake login page:</p>
-    <select id="platform">
-        <option value="google">Google</option>
-        <option value="facebook">Facebook</option>
-    </select>
-    <button onclick="generateLink()">Generate Link</button>
-    <p id="link-output"></p>
+<body class="bg-blue-700 text-gray-800">
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+            <h1 class="text-2xl font-bold mb-4 text-center text-blue-600">Fusion Phishers</h1>
+            <p class="text-sm text-gray-500 mb-6 text-center">
+                <strong>For Training & Ethical Use Only</strong>
+            </p>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+            <div class="mb-4">
+                <label for="platform" class="block text-gray-700 font-medium mb-2">
+                    Select a platform to generate a demo login page:
+                </label>
+                <select id="platform" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <option value="google">Google</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="twitter">X.com</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="github">GitHub</option>
+                </select>
+            </div>
+
+            <button onclick="generateLink()" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition">
+                Generate Link
+            </button>
+
+            <p id="link-output" class="mt-4 text-center text-2xl font-bold "></p>
+        </div>
+    </div>
+
+    <script src="static/script.js"></script>
 </body>
 </html>
